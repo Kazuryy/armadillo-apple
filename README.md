@@ -1,0 +1,43 @@
+# Armadillo
+
+An independent tvOS client for [Pangolin](https://github.com/fosrl/pangolin), the open-source zero-trust remote access platform.
+
+Armadillo lets you sign in and connect to a Pangolin network — Pangolin Cloud or your own self-hosted instance — directly from your Apple TV.
+
+> **Armadillo is an independent, community-built project.** It is not affiliated with, endorsed by, or sponsored by Fossorial, Inc., the makers of Pangolin.
+
+## Features
+
+- Sign in via QR code or device code — no typing passwords with the Siri Remote
+- Connect to Pangolin Cloud or any self-hosted Pangolin server
+- One-tap connect / disconnect from the Apple TV
+- View account, organization, and server at a glance
+
+## Building
+
+Armadillo embeds Pangolin's Go core (`olm`) as a static library, built separately from the Xcode project.
+
+1. Build the Go core for tvOS:
+   ```bash
+   cd PangolinGo
+   make build-tvos-all
+   ```
+   This produces `libpangolin_tvos_arm64.a` (device) and `libpangolin_tvos_sim_arm64.a` (simulator), which are not committed to the repo.
+
+2. Open `Pangolin.xcodeproj` in Xcode 16+.
+
+3. Select the **PangolinTvOS** scheme and a tvOS 17+ device or simulator, then build and run.
+
+## Requirements
+
+- Xcode 16 or later
+- tvOS 17.0+
+- Go (for building the core library — see `PangolinGo/.go-version`)
+
+## Project origin
+
+Armadillo started as a fork of [fosrl/apple](https://github.com/fosrl/apple) (Pangolin's official Apple client), extended with tvOS support, then extracted into its own repository focused solely on tvOS.
+
+## License
+
+AGPL-3.0 — see [LICENSE](LICENSE). Portions of this codebase originate from `pangolin-apple` and are used under its default AGPL-3 license grant.

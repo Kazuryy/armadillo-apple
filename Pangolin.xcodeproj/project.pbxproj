@@ -1,0 +1,592 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BDD38431304026CB00ABAAE2 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90D1911A2EC9248100912E68 /* NetworkExtension.framework */; };
+		BDD38432304026CB00ABAAE2 /* PacketTunneltvOS.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BDD38433304026CB00ABAAE2 /* PacketTunneltvOS.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BDD3843A304026CB00ABAAE2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 90BC22AC2EBC6C1D0072B44A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BDD38435304026CB00ABAAE2;
+			remoteInfo = PacketTunneltvOS;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BDD38419304026CB00ABAAE2 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				BDD38432304026CB00ABAAE2 /* PacketTunneltvOS.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		90D1911A2EC9248100912E68 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
+		BDD3841E304026CB00ABAAE2 /* PangolinTvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PangolinTvOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDD38433304026CB00ABAAE2 /* PacketTunneltvOS.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PacketTunneltvOS.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		BDD38420304026CB00ABAAE2 /* Exceptions for "Pangolin" folder in "PangolinTvOS" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Shared/AccountManager.swift,
+				Shared/AlertManager.swift,
+				Shared/APIClient.swift,
+				Shared/AuthManager.swift,
+				Shared/ConfigManager.swift,
+				Shared/DeviceInfo.swift,
+				Shared/FingerprintManager.swift,
+				Shared/IPAddressValidator.swift,
+				Shared/KeychainHelper.swift,
+				Shared/Model/Models.swift,
+				Shared/OLMStatusManager.swift,
+				Shared/OnboardingStateManager.swift,
+				Shared/SecretManager.swift,
+				Shared/SocketManager.swift,
+				Shared/SocketPath.swift,
+				Shared/TunnelCredentialsReference.swift,
+				Shared/TunnelManager.swift,
+				tvOS/Assets.xcassets,
+				tvOS/PangolinApp.swift,
+				tvOS/UI/TVGradientBackground.swift,
+				tvOS/UI/TVLoginView.swift,
+				tvOS/UI/TVMainView.swift,
+			);
+			target = BDD38413304026CB00ABAAE2 /* PangolinTvOS */;
+		};
+		BDD38434304026CB00ABAAE2 /* Exceptions for "PacketTunnel" folder in "PacketTunneltvOS" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Shared/GoLoggerBridge.m,
+				Shared/NetworkTransitionMonitor.swift,
+				Shared/PacketTunnelProvider.swift,
+				Shared/SocketPath.swift,
+				Shared/TunnelAdapter.swift,
+				Shared/TunnelCredentialsReference.swift,
+			);
+			target = BDD38435304026CB00ABAAE2 /* PacketTunneltvOS */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		BDD38436304026CB00ABAAE2 /* Exceptions for "PacketTunnel" folder in "Compile Sources" phase from "PacketTunneltvOS" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = BDD38437304026CB00ABAAE2 /* Sources */;
+			membershipExceptions = (
+				Shared/GoLoggerBridge.h,
+				"Shared/PacketTunnel-Bridging-Header.h",
+				Shared/TunnelFileDescriptor.h,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		90BC22B62EBC6C1D0072B44A /* Pangolin */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BDD38420304026CB00ABAAE2 /* Exceptions for "Pangolin" folder in "PangolinTvOS" target */,
+			);
+			path = Pangolin;
+			sourceTree = "<group>";
+		};
+		90D1973B2EC96BEC00912E68 /* PacketTunnel */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BDD38434304026CB00ABAAE2 /* Exceptions for "PacketTunnel" folder in "PacketTunneltvOS" target */,
+				BDD38436304026CB00ABAAE2 /* Exceptions for "PacketTunnel" folder in "Compile Sources" phase from "PacketTunneltvOS" target */,
+			);
+			path = PacketTunnel;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BDD38417304026CB00ABAAE2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BDD38438304026CB00ABAAE2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BDD38431304026CB00ABAAE2 /* NetworkExtension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		90BC22AB2EBC6C1D0072B44A = {
+			isa = PBXGroup;
+			children = (
+				90BC22B62EBC6C1D0072B44A /* Pangolin */,
+				90D1973B2EC96BEC00912E68 /* PacketTunnel */,
+				90D191192EC9248100912E68 /* Frameworks */,
+				90BC22B52EBC6C1D0072B44A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		90BC22B52EBC6C1D0072B44A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BDD3841E304026CB00ABAAE2 /* PangolinTvOS.app */,
+				BDD38433304026CB00ABAAE2 /* PacketTunneltvOS.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		90D191192EC9248100912E68 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				90D1911A2EC9248100912E68 /* NetworkExtension.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BDD38413304026CB00ABAAE2 /* PangolinTvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BDD3841B304026CB00ABAAE2 /* Build configuration list for PBXNativeTarget "PangolinTvOS" */;
+			buildPhases = (
+				BDD38416304026CB00ABAAE2 /* Sources */,
+				BDD38417304026CB00ABAAE2 /* Frameworks */,
+				BDD38418304026CB00ABAAE2 /* Resources */,
+				BDD38419304026CB00ABAAE2 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BDD3843B304026CB00ABAAE2 /* PBXTargetDependency */,
+			);
+			name = PangolinTvOS;
+			packageProductDependencies = (
+			);
+			productName = PangolinTvOS;
+			productReference = BDD3841E304026CB00ABAAE2 /* PangolinTvOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BDD38435304026CB00ABAAE2 /* PacketTunneltvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BDD3843C304026CB00ABAAE2 /* Build configuration list for PBXNativeTarget "PacketTunneltvOS" */;
+			buildPhases = (
+				BDD38437304026CB00ABAAE2 /* Sources */,
+				BDD38438304026CB00ABAAE2 /* Frameworks */,
+				BDD38439304026CB00ABAAE2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PacketTunneltvOS;
+			packageProductDependencies = (
+			);
+			productName = PacketTunneltvOS;
+			productReference = BDD38433304026CB00ABAAE2 /* PacketTunneltvOS.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		90BC22AC2EBC6C1D0072B44A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 0;
+				LastSwiftUpdateCheck = 2620;
+				LastUpgradeCheck = 2620;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 90BC22AF2EBC6C1D0072B44A /* Build configuration list for PBXProject "Pangolin" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 90BC22AB2EBC6C1D0072B44A;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 90BC22B52EBC6C1D0072B44A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BDD38413304026CB00ABAAE2 /* PangolinTvOS */,
+				BDD38435304026CB00ABAAE2 /* PacketTunneltvOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BDD38418304026CB00ABAAE2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BDD38439304026CB00ABAAE2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BDD38416304026CB00ABAAE2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BDD38437304026CB00ABAAE2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BDD3843B304026CB00ABAAE2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BDD38435304026CB00ABAAE2 /* PacketTunneltvOS */;
+			targetProxy = BDD3843A304026CB00ABAAE2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		90BC22BD2EBC6C1F0072B44A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 82V4UQQ84J;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		90BC22BE2EBC6C1F0072B44A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 82V4UQQ84J;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)";
+			};
+			name = Release;
+		};
+		BDD3841C304026CB00ABAAE2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = Pangolin/tvOS/Pangolin.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 82V4UQQ84J;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Pangolin/tvOS/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Armadillo;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				OTHER_LDFLAGS = "$(SRCROOT)/PangolinGo/libpangolin_tvos_arm64.a";
+				"OTHER_LDFLAGS[sdk=appletvsimulator*][arch=arm64]" = "$(SRCROOT)/PangolinGo/libpangolin_tvos_sim_arm64.a";
+				PRODUCT_BUNDLE_IDENTIFIER = dev.kazuryy.Armadillo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 17.0;
+			};
+			name = Debug;
+		};
+		BDD3841D304026CB00ABAAE2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = Pangolin/tvOS/Pangolin.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 82V4UQQ84J;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Pangolin/tvOS/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Armadillo;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				OTHER_LDFLAGS = "$(SRCROOT)/PangolinGo/libpangolin_tvos_arm64.a";
+				"OTHER_LDFLAGS[sdk=appletvsimulator*][arch=arm64]" = "$(SRCROOT)/PangolinGo/libpangolin_tvos_sim_arm64.a";
+				PRODUCT_BUNDLE_IDENTIFIER = dev.kazuryy.Armadillo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 17.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BDD3843D304026CB00ABAAE2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = PacketTunnel/tvOS/PacketTunnel.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 82V4UQQ84J;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PacketTunnel/tvOS/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PacketTunneltvOS;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PangolinGo",
+				);
+				MARKETING_VERSION = 1.0.0;
+				OTHER_LDFLAGS = "$(SRCROOT)/PangolinGo/libpangolin_tvos_arm64.a";
+				"OTHER_LDFLAGS[sdk=appletvsimulator*][arch=arm64]" = "$(SRCROOT)/PangolinGo/libpangolin_tvos_sim_arm64.a";
+				PRODUCT_BUNDLE_IDENTIFIER = dev.kazuryy.Armadillo.PacketTunnel;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "PacketTunnel/Shared/PacketTunnel-Bridging-Header.h";
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 17.0;
+			};
+			name = Debug;
+		};
+		BDD3843E304026CB00ABAAE2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = PacketTunnel/tvOS/PacketTunnel.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 82V4UQQ84J;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PacketTunnel/tvOS/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PacketTunneltvOS;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PangolinGo",
+				);
+				MARKETING_VERSION = 1.0.0;
+				OTHER_LDFLAGS = "$(SRCROOT)/PangolinGo/libpangolin_tvos_arm64.a";
+				"OTHER_LDFLAGS[sdk=appletvsimulator*][arch=arm64]" = "$(SRCROOT)/PangolinGo/libpangolin_tvos_sim_arm64.a";
+				PRODUCT_BUNDLE_IDENTIFIER = dev.kazuryy.Armadillo.PacketTunnel;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "PacketTunnel/Shared/PacketTunnel-Bridging-Header.h";
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 17.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		90BC22AF2EBC6C1D0072B44A /* Build configuration list for PBXProject "Pangolin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				90BC22BD2EBC6C1F0072B44A /* Debug */,
+				90BC22BE2EBC6C1F0072B44A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BDD3841B304026CB00ABAAE2 /* Build configuration list for PBXNativeTarget "PangolinTvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BDD3841C304026CB00ABAAE2 /* Debug */,
+				BDD3841D304026CB00ABAAE2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BDD3843C304026CB00ABAAE2 /* Build configuration list for PBXNativeTarget "PacketTunneltvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BDD3843D304026CB00ABAAE2 /* Debug */,
+				BDD3843E304026CB00ABAAE2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 90BC22AC2EBC6C1D0072B44A /* Project object */;
+}
