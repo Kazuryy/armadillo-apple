@@ -1,6 +1,8 @@
-# Armadillo
+# Armadillo (Apple)
 
 An independent tvOS client for [Pangolin](https://github.com/fosrl/pangolin), the open-source zero-trust remote access platform.
+
+This repo covers the Apple platforms (tvOS today). Other Armadillo clients — Android TV, webOS — may live in their own repos alongside this one.
 
 Armadillo lets you sign in and connect to a Pangolin network — Pangolin Cloud or your own self-hosted instance — directly from your Apple TV.
 
