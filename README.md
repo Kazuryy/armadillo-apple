@@ -47,3 +47,7 @@ Armadillo started as a fork of [fosrl/apple](https://github.com/fosrl/apple) (Pa
 ## License
 
 AGPL-3.0 — see [LICENSE](LICENSE). Portions of this codebase originate from `pangolin-apple` and are used under its default AGPL-3 license grant.
+
+---
+
+Developed with [Claude Code](https://claude.com/claude-code).
