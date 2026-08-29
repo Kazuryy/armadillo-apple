@@ -8,6 +8,10 @@ Armadillo lets you sign in and connect to a Pangolin network — Pangolin Cloud 
 
 > **Armadillo is an independent, community-built project.** It is not affiliated with, endorsed by, or sponsored by Fossorial, Inc., the makers of Pangolin.
 
+## Try it
+
+Public beta via TestFlight: [testflight.apple.com/join/aA1tWJm7](https://testflight.apple.com/join/aA1tWJm7)
+
 ## Features
 
 - Sign in via QR code or device code — no typing passwords with the Siri Remote
