@@ -164,6 +164,8 @@ $(ARCHIVE_TVOS_ARM64): $(GO_DIR)/main.go $(GO_DIR)/go.mod $(GOROOT)/.prepared
 	CGO_CFLAGS="-isysroot $$SDKROOT -arch arm64 -mtvos-version-min=17.0" \
 	CGO_LDFLAGS="-isysroot $$SDKROOT -arch arm64 -mtvos-version-min=17.0" \
 	go build --buildmode=c-archive -o $(LIB_NAME)_tvos_arm64.a
+	@# The PangolinGo Swift module (module.modulemap) imports this unsuffixed header.
+	@cp $(HEADER_TVOS_ARM64) $(HEADER)
 	@echo "tvOS arm64 build complete: $(ARCHIVE_TVOS_ARM64)"
 
 build-tvos: build-tvos-arm64
@@ -185,6 +187,8 @@ $(ARCHIVE_TVOS_SIM_ARM64): $(GO_DIR)/main.go $(GO_DIR)/go.mod $(GOROOT)/.prepare
 	CGO_CFLAGS="-isysroot $$SDKROOT -arch arm64 -mtvos-simulator-version-min=17.0" \
 	CGO_LDFLAGS="-isysroot $$SDKROOT -arch arm64 -mtvos-simulator-version-min=17.0" \
 	go build --buildmode=c-archive -o $(LIB_NAME)_tvos_sim_arm64.a
+	@# Same exports as the device build, so a simulator-only build can still produce the header.
+	@cp $(HEADER_TVOS_SIM_ARM64) $(HEADER)
 	@echo "tvOS simulator arm64 build complete: $(ARCHIVE_TVOS_SIM_ARM64)"
 
 build-tvos-all: build-tvos-arm64 build-tvos-simulator-arm64
