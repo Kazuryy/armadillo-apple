@@ -214,8 +214,6 @@
 				BuildIndependentTargetsInParallel = 0;
 				LastSwiftUpdateCheck = 2620;
 				LastUpgradeCheck = 2620;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 90BC22AF2EBC6C1D0072B44A /* Build configuration list for PBXProject "Pangolin" */;
 			developmentRegion = en;
