@@ -18,17 +18,23 @@ Public beta via TestFlight: [testflight.apple.com/join/aA1tWJm7](https://testfli
 - Connect to Pangolin Cloud or any self-hosted Pangolin server
 - One-tap connect / disconnect from the Apple TV
 - View account, organization, and server at a glance
+- Switch between several accounts and organizations
+- Route all traffic through an exit node
+- See the live status of your sites
+- Connect automatically on the Wi-Fi or Ethernet networks you choose
+- DNS, MTU and routing settings
 
 ## Building
 
 Armadillo embeds Pangolin's Go core (`olm`) as a static library, built separately from the Xcode project.
 
-1. Build the Go core for tvOS:
+1. Build the Go core for tvOS, from the repository root:
    ```bash
-   cd PangolinGo
    make build-tvos-all
    ```
-   This produces `libpangolin_tvos_arm64.a` (device) and `libpangolin_tvos_sim_arm64.a` (simulator), which are not committed to the repo.
+   This produces `PangolinGo/libpangolin_tvos_arm64.a` (device) and `PangolinGo/libpangolin_tvos_sim_arm64.a` (simulator), which are not committed to the repo.
+
+   The Makefile builds with a patched copy of your Go toolchain (kept in `.tmp/goroot`) so that tunnel timers keep counting while the Apple TV sleeps. It stops with an error if that patch cannot be applied to your Go version.
 
 2. Open `Pangolin.xcodeproj` in Xcode 16+.
 
@@ -38,7 +44,7 @@ Armadillo embeds Pangolin's Go core (`olm`) as a static library, built separatel
 
 - Xcode 16 or later
 - tvOS 17.0+
-- Go (for building the core library — see `PangolinGo/.go-version`)
+- Go 1.26 or later, to build the core library (see `PangolinGo/.go-version`)
 
 ## Project origin
 

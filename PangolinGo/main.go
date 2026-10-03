@@ -12,6 +12,7 @@ import (
 	"runtime/debug"
 	"sync"
 
+	dnsOverride "github.com/fosrl/olm/dns/override"
 	olmpkg "github.com/fosrl/olm/olm"
 )
 import "time"
@@ -27,22 +28,29 @@ type InitOlmConfig struct {
 
 // StartTunnelConfig represents the JSON configuration for startTunnel
 type StartTunnelConfig struct {
-	Endpoint            string         `json:"endpoint"`
-	ID                  string         `json:"id"`
-	Secret              string         `json:"secret"`
-	MTU                 int            `json:"mtu"`
-	DNS                 string         `json:"dns"`
-	Holepunch           bool           `json:"holepunch"`
-	PingIntervalSeconds int            `json:"pingIntervalSeconds"`
-	PingTimeoutSeconds  int            `json:"pingTimeoutSeconds"`
-	UserToken           string         `json:"userToken"`
-	OrgID               string         `json:"orgId"`
-	UpstreamDNS         []string       `json:"upstreamDNS"`
-	MatchDomains        []string       `json:"matchDomains"`
-	OverrideDNS         bool           `json:"overrideDNS"`
-	TunnelDNS           bool           `json:"tunnelDNS"`
-	Fingerprint         map[string]any `json:"fingerprint"`
-	Postures            map[string]any `json:"postures"`
+	Endpoint                string         `json:"endpoint"`
+	ID                      string         `json:"id"`
+	Secret                  string         `json:"secret"`
+	MTU                     int            `json:"mtu"`
+	DNS                     string         `json:"dns"`
+	Holepunch               bool           `json:"holepunch"`
+	PingIntervalSeconds     int            `json:"pingIntervalSeconds"`
+	PingTimeoutSeconds      int            `json:"pingTimeoutSeconds"`
+	UserToken               string         `json:"userToken"`
+	OrgID                   string         `json:"orgId"`
+	UpstreamDNS             []string       `json:"upstreamDNS"`
+	MatchDomains            []string       `json:"matchDomains"`
+	OverrideDNS             bool           `json:"overrideDNS"`
+	TunnelDNS               bool           `json:"tunnelDNS"`
+	ExitNodeTakesPrecedence bool           `json:"exitNodeTakesPrecedence"`
+	Fingerprint             map[string]any `json:"fingerprint"`
+	Postures                map[string]any `json:"postures"`
+
+	// GatewaySiteResourceID/GatewaySiteIDs, when set, establish the exit node (gateway) as the
+	// tunnel comes up. The resource ID is what olm uses to apply later server-pushed changes
+	// to that resource only.
+	GatewaySiteResourceID int   `json:"gatewaySiteResourceId"`
+	GatewaySiteIDs        []int `json:"gatewaySiteIds"`
 }
 
 var (
@@ -86,8 +94,35 @@ func initOlm(configJSON *C.char) *C.char {
 	}
 	olm = o
 
+	// Best-effort sweep of any stale DNS override left behind by a previous
+	// unclean shutdown (e.g. a crashed/killed extension process from before
+	// this binary skipped installing its own scutil override). No-op if
+	// nothing is stuck.
+	if err := dnsOverride.CleanupStaleState(""); err != nil {
+		appLogger.Warn("Stale DNS cleanup failed (continuing): %v", err)
+	}
+
 	appLogger.Debug("Init completed successfully")
 	return C.CString("Init completed successfully")
+}
+
+// sweepStaleDNS removes any leftover DNS override state (e.g. a scutil key
+// from a previous version of this app, or a crashed session) without
+// requiring a full tunnel connect/disconnect cycle. Safe to call at any time,
+// including while a tunnel is connected - see NativeDNSManaged in
+// startTunnel, which means this process no longer installs its own override
+// for a running tunnel to disturb. Called from Swift's wake() (see
+// PacketTunnelProvider.swift) since that's a hook the OS reliably invokes
+// after every sleep - the exact trigger reported for this class of bug - and
+// this process (unlike the containing app) still holds the privileges needed
+// to touch the scutil state store.
+//
+//export sweepStaleDNS
+func sweepStaleDNS() *C.char {
+	if err := dnsOverride.CleanupStaleState(""); err != nil {
+		return C.CString(fmt.Sprintf("Error: %v", err))
+	}
+	return C.CString("DNS sweep completed")
 }
 
 //export startTunnel
@@ -120,22 +155,29 @@ func startTunnel(fd C.int, configJSON *C.char) *C.char {
 
 	// Create OLM Config with tunnel parameters
 	tunnelConfig := olmpkg.TunnelConfig{
-		Endpoint:             config.Endpoint,
-		ID:                   config.ID,
-		Secret:               config.Secret,
-		MTU:                  config.MTU,
-		Holepunch:            config.Holepunch,
-		PingIntervalDuration: time.Duration(config.PingIntervalSeconds) * time.Second,
-		PingTimeoutDuration:  time.Duration(config.PingTimeoutSeconds) * time.Second,
-		FileDescriptorTun:    uint32(fd),
-		UserToken:            config.UserToken,
-		OverrideDNS:          config.OverrideDNS,
-		TunnelDNS:            config.TunnelDNS,
-		UpstreamDNS:          config.UpstreamDNS,
-		MatchDomains:         config.MatchDomains,
-		OrgID:                config.OrgID,
-		InitialFingerprint:   config.Fingerprint,
-		InitialPostures:      config.Postures,
+		Endpoint:                          config.Endpoint,
+		ID:                                config.ID,
+		Secret:                            config.Secret,
+		MTU:                               config.MTU,
+		Holepunch:                         config.Holepunch,
+		PingIntervalDuration:              time.Duration(config.PingIntervalSeconds) * time.Second,
+		PingTimeoutDuration:               time.Duration(config.PingTimeoutSeconds) * time.Second,
+		FileDescriptorTun:                 uint32(fd),
+		UserToken:                         config.UserToken,
+		OverrideDNS:                       config.OverrideDNS,
+		TunnelDNS:                         config.TunnelDNS,
+		DisableRoutesAndAliasesOnExitNode: config.ExitNodeTakesPrecedence,
+		// This binary is always the macOS/iOS app embed (never the CLI), which
+		// applies DNS override natively via NEDNSSettings (see TunnelAdapter.swift).
+		NativeDNSManaged:   true,
+		UpstreamDNS:        config.UpstreamDNS,
+		MatchDomains:       config.MatchDomains,
+		OrgID:              config.OrgID,
+		InitialFingerprint: config.Fingerprint,
+		InitialPostures:    config.Postures,
+
+		GatewaySiteResourceId: config.GatewaySiteResourceID,
+		GatewaySiteIds:        config.GatewaySiteIDs,
 	}
 
 	// print the config for debugging
@@ -264,9 +306,35 @@ func setPowerMode(mode *C.char) *C.char {
 	}
 
 	modeStr := C.GoString(mode)
-	// olm.SetPowerMode(modeStr)
+	if err := olm.SetPowerMode(modeStr); err != nil {
+		appLogger.Error("Failed to set power mode: %v", err)
+		return C.CString(fmt.Sprintf("Error: %v", err))
+	}
 	appLogger.Info("Power mode set to: %s", modeStr)
 	return C.CString(fmt.Sprintf("Power mode set to: %s", modeStr))
+}
+
+// pokeConnection sends an immediate ping over the control websocket instead
+// of waiting for the next scheduled interval, so a live connection confirms
+// itself in one round trip and a dead one starts reconnecting right away.
+// Intended to be called from a "device woke up" hook (macOS, where sleep no
+// longer tears the websocket down via power mode - see setPowerMode's
+// iOS-only use in PacketTunnelProvider.swift - so recovery needs a nudge
+// tied to a real signal rather than a fixed timer).
+//
+//export pokeConnection
+func pokeConnection() *C.char {
+	tunnelMutex.Lock()
+	running := tunnelRunning
+	tunnelMutex.Unlock()
+
+	if !running {
+		appLogger.Warn("Tunnel is not running")
+		return C.CString("Error: Tunnel not running")
+	}
+
+	olm.PokeConnection()
+	return C.CString("Poked connection")
 }
 
 //export rebindSocket

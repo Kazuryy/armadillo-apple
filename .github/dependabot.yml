@@ -2,6 +2,7 @@ version: 2
 updates:
   - package-ecosystem: "gomod"
     directory: "/PangolinGo"
+    target-branch: "develop"
     schedule:
       interval: "daily"
     groups:

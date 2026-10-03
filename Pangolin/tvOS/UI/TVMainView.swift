@@ -4,6 +4,7 @@ struct TVMainView: View {
     @ObservedObject var authManager: AuthManager
     @ObservedObject var accountManager: AccountManager
     @ObservedObject var tunnelManager: TunnelManager
+    @ObservedObject var configManager: ConfigManager
     @State private var showLoginView = false
 
     private var tunnelStatus: TunnelStatus {
@@ -30,7 +31,23 @@ struct TVMainView: View {
         }
     }
 
+    /// What the Exit Node row shows: the chosen node's name, or "None".
+    private var exitNodeSummary: String {
+        guard let id = tunnelManager.activeExitNodeId,
+            let node = tunnelManager.availableExitNodes.first(where: { $0.siteResourceId == id })
+        else {
+            return "None"
+        }
+        return node.name
+    }
+
     var body: some View {
+        NavigationStack {
+            mainContent
+        }
+    }
+
+    private var mainContent: some View {
         ZStack {
             TVGradientBackground(isActive: tunnelStatus == .connected)
 
@@ -64,6 +81,8 @@ struct TVMainView: View {
 
                     infoCard
 
+                    navigationCards
+
                     Button {
                         Task { await authManager.logout() }
                     } label: {
@@ -84,12 +103,90 @@ struct TVMainView: View {
             }
         }
         .fullScreenCover(isPresented: $showLoginView) {
-            TVLoginView(
+            // The login screen has no background of its own, so give the cover an opaque one.
+            ZStack {
+                TVGradientBackground()
+                TVLoginView(
+                    authManager: authManager,
+                    accountManager: accountManager,
+                    startImmediatelyWithHostname: accountManager.activeAccount?.hostname
+                )
+            }
+        }
+        .task(id: authManager.currentOrg?.orgId) {
+            if !authManager.sessionExpired {
+                await tunnelManager.refreshExitNodes()
+            }
+        }
+    }
+
+    // MARK: - Navigation cards
+
+    @ViewBuilder
+    private var navigationCards: some View {
+        if !authManager.sessionExpired {
+            if authManager.currentOrg != nil {
+                NavigationLink {
+                    TVExitNodeView(tunnelManager: tunnelManager)
+                } label: {
+                    TVRowLabel(
+                        systemImage: "globe",
+                        title: "Exit Node",
+                        value: exitNodeSummary,
+                        showsChevron: true)
+                }
+                .buttonStyle(TVCardButtonStyle())
+            }
+
+            if tunnelStatus == .connected {
+                NavigationLink {
+                    TVSiteStatusView(tunnelManager: tunnelManager)
+                } label: {
+                    TVRowLabel(
+                        systemImage: "point.3.connected.trianglepath.dotted",
+                        title: "Sites",
+                        showsChevron: true)
+                }
+                .buttonStyle(TVCardButtonStyle())
+            }
+
+            if authManager.organizations.count > 1 {
+                NavigationLink {
+                    TVOrganizationPickerView(authManager: authManager)
+                } label: {
+                    TVRowLabel(
+                        systemImage: "building.2.fill",
+                        title: "Switch Organization",
+                        value: authManager.currentOrg?.name,
+                        showsChevron: true)
+                }
+                .buttonStyle(TVCardButtonStyle())
+            }
+        }
+
+        NavigationLink {
+            TVAccountsView(
                 authManager: authManager,
                 accountManager: accountManager,
-                startImmediatelyWithHostname: accountManager.activeAccount?.hostname
-            )
+                tunnelManager: tunnelManager)
+        } label: {
+            TVRowLabel(
+                systemImage: "person.2.fill",
+                title: "Accounts",
+                value: "\(accountManager.accounts.count)",
+                showsChevron: true)
         }
+        .buttonStyle(TVCardButtonStyle())
+
+        NavigationLink {
+            TVPreferencesView(configManager: configManager, tunnelManager: tunnelManager)
+        } label: {
+            TVRowLabel(
+                systemImage: "gearshape.fill",
+                title: "Settings",
+                showsChevron: true)
+        }
+        .buttonStyle(TVCardButtonStyle())
     }
 
     // MARK: - Connect card
@@ -232,6 +329,7 @@ struct TVCardButtonStyle: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
+            .environment(\.tvCardFocused, isFocused)
             .foregroundColor(isFocused ? .black : .primary)
             .background(
                 RoundedRectangle(cornerRadius: 24)

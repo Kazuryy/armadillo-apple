@@ -62,7 +62,8 @@ struct PangolinApp: App {
                     TVMainView(
                         authManager: authManager,
                         accountManager: accountManager,
-                        tunnelManager: tunnelManager
+                        tunnelManager: tunnelManager,
+                        configManager: configManager
                     )
                 } else {
                     TVLoginView(
