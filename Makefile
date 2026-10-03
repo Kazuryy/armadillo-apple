@@ -41,6 +41,11 @@ $(GOROOT)/.prepared:
 	@if [ -f "$(GO_DIR)/goruntime-boottime-over-monotonic.diff" ]; then \
 		echo "Applying goruntime boottime patch..."; \
 		cat "$(GO_DIR)/goruntime-boottime-over-monotonic.diff" | patch -p1 -f -N -r- -d "$(GOROOT)" || true; \
+		grep -q libc_mach_continuous_time "$(GOROOT)/src/runtime/sys_darwin.go" || { \
+			echo "Error: the goruntime boottime patch did not apply to $(REAL_GOROOT)."; \
+			echo "Tunnel timers would not account for time spent asleep. Refresh the patch for this Go version."; \
+			exit 1; \
+		}; \
 	fi
 	@touch "$@"
 	@echo "GOROOT prepared with patches"
