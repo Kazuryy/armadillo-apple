@@ -30,7 +30,23 @@ struct TVMainView: View {
         }
     }
 
+    /// What the Exit Node row shows: the chosen node's name, or "None".
+    private var exitNodeSummary: String {
+        guard let id = tunnelManager.activeExitNodeId,
+            let node = tunnelManager.availableExitNodes.first(where: { $0.siteResourceId == id })
+        else {
+            return "None"
+        }
+        return node.name
+    }
+
     var body: some View {
+        NavigationStack {
+            mainContent
+        }
+    }
+
+    private var mainContent: some View {
         ZStack {
             TVGradientBackground(isActive: tunnelStatus == .connected)
 
@@ -64,6 +80,8 @@ struct TVMainView: View {
 
                     infoCard
 
+                    navigationCards
+
                     Button {
                         Task { await authManager.logout() }
                     } label: {
@@ -90,6 +108,70 @@ struct TVMainView: View {
                 startImmediatelyWithHostname: accountManager.activeAccount?.hostname
             )
         }
+        .task(id: authManager.currentOrg?.orgId) {
+            if !authManager.sessionExpired {
+                await tunnelManager.refreshExitNodes()
+            }
+        }
+    }
+
+    // MARK: - Navigation cards
+
+    @ViewBuilder
+    private var navigationCards: some View {
+        if !authManager.sessionExpired {
+            if authManager.currentOrg != nil {
+                NavigationLink {
+                    TVExitNodeView(tunnelManager: tunnelManager)
+                } label: {
+                    TVRowLabel(
+                        systemImage: "globe",
+                        title: "Exit Node",
+                        value: exitNodeSummary,
+                        showsChevron: true)
+                }
+                .buttonStyle(TVCardButtonStyle())
+            }
+
+            if tunnelStatus == .connected {
+                NavigationLink {
+                    TVSiteStatusView(tunnelManager: tunnelManager)
+                } label: {
+                    TVRowLabel(
+                        systemImage: "point.3.connected.trianglepath.dotted",
+                        title: "Sites",
+                        showsChevron: true)
+                }
+                .buttonStyle(TVCardButtonStyle())
+            }
+
+            if authManager.organizations.count > 1 {
+                NavigationLink {
+                    TVOrganizationPickerView(authManager: authManager)
+                } label: {
+                    TVRowLabel(
+                        systemImage: "building.2.fill",
+                        title: "Switch Organization",
+                        value: authManager.currentOrg?.name,
+                        showsChevron: true)
+                }
+                .buttonStyle(TVCardButtonStyle())
+            }
+        }
+
+        NavigationLink {
+            TVAccountsView(
+                authManager: authManager,
+                accountManager: accountManager,
+                tunnelManager: tunnelManager)
+        } label: {
+            TVRowLabel(
+                systemImage: "person.2.fill",
+                title: "Accounts",
+                value: "\(accountManager.accounts.count)",
+                showsChevron: true)
+        }
+        .buttonStyle(TVCardButtonStyle())
     }
 
     // MARK: - Connect card
