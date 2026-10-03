@@ -60,6 +60,8 @@
 				Shared/SecretManager.swift,
 				Shared/SocketManager.swift,
 				Shared/SocketPath.swift,
+				Shared/Tunnel/ActivateOnDemandOption.swift,
+				Shared/Tunnel/ActivateOnDemandViewModel.swift,
 				Shared/TunnelCredentialsReference.swift,
 				Shared/TunnelManager.swift,
 				tvOS/Assets.xcassets,
