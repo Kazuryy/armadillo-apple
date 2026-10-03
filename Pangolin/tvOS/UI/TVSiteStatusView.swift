@@ -63,7 +63,7 @@ struct TVSiteStatusView: View {
                     .truncationMode(.middle)
                 Text(detail(for: item))
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .tvSecondary()
                     .lineLimit(1)
                     .truncationMode(.middle)
             }

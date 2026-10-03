@@ -77,7 +77,12 @@ struct TVAccountsView: View {
                 "\(displayName(for: account)) will be signed out of Armadillo on this Apple TV.")
         }
         .fullScreenCover(isPresented: $showAddAccount) {
-            TVLoginView(authManager: authManager, accountManager: accountManager)
+            // The login screen has no background of its own, so give the cover an opaque one.
+            // Otherwise the accounts list stays visible behind it.
+            ZStack {
+                TVGradientBackground()
+                TVLoginView(authManager: authManager, accountManager: accountManager)
+            }
         }
         .onChange(of: accountManager.activeUserId) { _, _ in
             // A successful login adds the account and makes it the active one.

@@ -1,5 +1,35 @@
 import SwiftUI
 
+/// Whether the card a view sits in is currently focused. The card decides this once, next to its
+/// background, so the text on it can never disagree with the background it is drawn on.
+private struct TVCardFocusedKey: EnvironmentKey {
+    static let defaultValue = false
+}
+
+extension EnvironmentValues {
+    var tvCardFocused: Bool {
+        get { self[TVCardFocusedKey.self] }
+        set { self[TVCardFocusedKey.self] = newValue }
+    }
+}
+
+/// Secondary text color that stays readable on a card in both states: dark gray on the white
+/// focused card, light gray on the dark resting card. It uses fixed colors on purpose. The
+/// system's secondary color adapts to focus by itself and can end up dark on a dark card.
+private struct TVSecondaryStyle: ViewModifier {
+    @Environment(\.tvCardFocused) private var cardFocused
+
+    func body(content: Content) -> some View {
+        content.foregroundColor(cardFocused ? Color.black.opacity(0.6) : Color.white.opacity(0.6))
+    }
+}
+
+extension View {
+    func tvSecondary() -> some View {
+        modifier(TVSecondaryStyle())
+    }
+}
+
 // Building blocks shared by the pushed tvOS screens. They reuse the look of the main screen:
 // the charcoal TVGradientBackground, soft rounded cards that lift to a white focused state
 // (TVCardButtonStyle), and brand-orange icons.
@@ -80,7 +110,7 @@ struct TVRowLabel: View {
                 if let subtitle {
                     Text(subtitle)
                         .font(.caption)
-                        .foregroundColor(.secondary)
+                        .tvSecondary()
                         .lineLimit(2)
                 }
             }
@@ -90,7 +120,7 @@ struct TVRowLabel: View {
             if let value {
                 Text(value)
                     .font(.subheadline)
-                    .foregroundColor(.secondary)
+                    .tvSecondary()
                     .lineLimit(1)
                     .truncationMode(.middle)
             }
@@ -108,7 +138,7 @@ struct TVRowLabel: View {
             if showsChevron {
                 Image(systemName: "chevron.right")
                     .font(.system(size: 18, weight: .semibold))
-                    .foregroundColor(.secondary)
+                    .tvSecondary()
             }
         }
         .padding(.horizontal, 20)
@@ -155,6 +185,7 @@ struct TVInfoCard<Content: View>: View {
 
         var body: some View {
             content
+                .environment(\.tvCardFocused, isFocused)
                 .foregroundColor(isFocused ? .black : .primary)
                 .background(
                     RoundedRectangle(cornerRadius: 24)

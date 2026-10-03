@@ -103,11 +103,15 @@ struct TVMainView: View {
             }
         }
         .fullScreenCover(isPresented: $showLoginView) {
-            TVLoginView(
-                authManager: authManager,
-                accountManager: accountManager,
-                startImmediatelyWithHostname: accountManager.activeAccount?.hostname
-            )
+            // The login screen has no background of its own, so give the cover an opaque one.
+            ZStack {
+                TVGradientBackground()
+                TVLoginView(
+                    authManager: authManager,
+                    accountManager: accountManager,
+                    startImmediatelyWithHostname: accountManager.activeAccount?.hostname
+                )
+            }
         }
         .task(id: authManager.currentOrg?.orgId) {
             if !authManager.sessionExpired {
@@ -325,6 +329,7 @@ struct TVCardButtonStyle: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
+            .environment(\.tvCardFocused, isFocused)
             .foregroundColor(isFocused ? .black : .primary)
             .background(
                 RoundedRectangle(cornerRadius: 24)
