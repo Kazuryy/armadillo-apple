@@ -18,6 +18,11 @@ Public beta via TestFlight: [testflight.apple.com/join/aA1tWJm7](https://testfli
 - Connect to Pangolin Cloud or any self-hosted Pangolin server
 - One-tap connect / disconnect from the Apple TV
 - View account, organization, and server at a glance
+- Switch between several accounts and organizations
+- Route all traffic through an exit node
+- See the live status of your sites
+- Connect automatically on the Wi-Fi or Ethernet networks you choose
+- DNS, MTU and routing settings
 
 ## Building
 

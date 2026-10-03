@@ -66,14 +66,18 @@
 				Shared/TunnelManager.swift,
 				tvOS/Assets.xcassets,
 				tvOS/PangolinApp.swift,
+				tvOS/UI/TVAboutView.swift,
 				tvOS/UI/TVAccountsView.swift,
 				tvOS/UI/TVComponents.swift,
 				tvOS/UI/TVExitNodeView.swift,
 				tvOS/UI/TVGradientBackground.swift,
 				tvOS/UI/TVLoginView.swift,
 				tvOS/UI/TVMainView.swift,
+				tvOS/UI/TVOnDemandView.swift,
 				tvOS/UI/TVOrganizationPickerView.swift,
+				tvOS/UI/TVPreferencesView.swift,
 				tvOS/UI/TVSiteStatusView.swift,
+				tvOS/UI/TVTextEntryView.swift,
 			);
 			target = BDD38413304026CB00ABAAE2 /* PangolinTvOS */;
 		};

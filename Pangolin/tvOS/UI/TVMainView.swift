@@ -4,6 +4,7 @@ struct TVMainView: View {
     @ObservedObject var authManager: AuthManager
     @ObservedObject var accountManager: AccountManager
     @ObservedObject var tunnelManager: TunnelManager
+    @ObservedObject var configManager: ConfigManager
     @State private var showLoginView = false
 
     private var tunnelStatus: TunnelStatus {
@@ -169,6 +170,16 @@ struct TVMainView: View {
                 systemImage: "person.2.fill",
                 title: "Accounts",
                 value: "\(accountManager.accounts.count)",
+                showsChevron: true)
+        }
+        .buttonStyle(TVCardButtonStyle())
+
+        NavigationLink {
+            TVPreferencesView(configManager: configManager, tunnelManager: tunnelManager)
+        } label: {
+            TVRowLabel(
+                systemImage: "gearshape.fill",
+                title: "Settings",
                 showsChevron: true)
         }
         .buttonStyle(TVCardButtonStyle())
